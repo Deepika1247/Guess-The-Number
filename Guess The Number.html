@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+        html {
+            height: 99.8%;
+            font-family: 'Courgette', cursive;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(140deg, #00e1ff, #60f7b1, #9ff3de, #00FFCA);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: wrap;
+            padding: 5%;
+            margin: 5%;
+            border-radius: 5px;
+            box-shadow: 0 0 1px;
+            background-color: #fff5;
+            box-sizing: content-box;
+        }
+
+        ul {
+            width: 80%;
+            margin: 0px;
+            background-color: #fff3;
+            padding: 1% 5%;
+            box-shadow: 0 0 2px #00e1ff;
+        }
+
+        li {
+            margin: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            width: 100%;
+        }
+
+        input[type='number'] {
+            border: none;
+            padding: 5px;
+            font-size: 1rem;
+            width: 88%;
+            text-align: center;
+            outline: 1px solid #00FFCA;
+            background-color: #fff5;
+        }
+
+        input[type='number']:focus {
+            outline: 1px solid #00e1ff;
+        }
+
+        input[type='submit'] {
+            width: 90%;
+            margin: 5%;
+            padding: 7px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: 1px solid #00e1ff;
+            background-color: #60f7b1;
+        }
+
+        input[type='submit']:active {
+            border: 1px solid #60f7b1;
+            background-color: #00e1ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Guess The Number</h1>
+        <input type="number" name="numberinput" value="1" id="numberinput">
+        <br>
+        <input type="submit" id="submit" value="Submit" onclick="check()">
+
+        <ul id="listitem">
+            <h3>Answer Status:</h3>
+        </ul>
+
+    </div>
+</body>
+<script>
+    let no = Math.round(Math.random() * 10);
+    let count = 0;
+
+    function check() {
+        ++count;
+
+        let numberinput = document.getElementById("numberinput").value;
+        let comment = "";
+
+        if (count <= 5) {
+
+            if (no == numberinput) {
+
+                document.getElementById("submit").style.visibility = "hidden";
+
+                comment = "Your answer is right";
+                userInputs(numberinput, comment);
+
+            }
+            else if (no < numberinput) {
+                comment = " number is big";
+                userInputs(numberinput, comment);
+            }
+            else if (no > numberinput) {
+                comment = " number is small";
+                userInputs(numberinput, comment);
+            }
+        }
+        else {
+            document.getElementById("submit").style.visibility = "hidden";
+        }
+    }
+
+    function userInputs(numberinput, comment) {
+        let element = document.createElement("li");
+        let text = document.createTextNode(`${numberinput} ${comment}`);
+
+        element.appendChild(text);
+        document.getElementById("listitem").appendChild(element);
+    }
+
+</script>
+
+</html>
